@@ -19,6 +19,8 @@
             --neon-shadow: rgba(102, 252, 241, 0.3);
             --border-color: rgba(255, 255, 255, 0.05);
             --timeline-line: rgba(197, 198, 199, 0.2);
+            /* 다크 모드용 배경 오버레이 */
+            --hero-overlay: rgba(11, 12, 16, 0.85); 
         }
 
         [data-theme="light"] {
@@ -31,6 +33,8 @@
             --neon-shadow: rgba(13, 148, 136, 0.2);
             --border-color: rgba(0, 0, 0, 0.05);
             --timeline-line: rgba(75, 85, 99, 0.2);
+            /* 라이트 모드용 배경 오버레이 */
+            --hero-overlay: rgba(255, 255, 255, 0.85); 
         }
 
         * {
@@ -82,7 +86,7 @@
         }
 
         /* =========================================
-           Hero Section
+           Hero Section (배경 이미지 추가됨)
            ========================================= */
         .hero {
             min-height: 100vh;
@@ -93,6 +97,13 @@
             text-align: center;
             padding: 2rem;
             position: relative;
+            
+            /* 그라데이션 오버레이 + 업로드하신 이미지 배경 적용 */
+            background-image: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('image_f15a01.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed; /* 스크롤 시 약간의 패럴랙스 효과 */
+            transition: background-image 0.3s ease;
         }
 
         .hero h1 {
@@ -366,16 +377,15 @@
     </footer>
 
     <script>
-        // --- Theme Toggle Logic (미리보기 환경 에러 방지용 try-catch 추가) ---
+        // --- Theme Toggle Logic ---
         const themeToggleBtn = document.getElementById('theme-toggle');
         const rootElement = document.documentElement;
         let savedTheme = null;
 
         try {
-            // localStorage 접근 시도 (미리보기 환경에서 차단될 수 있음)
             savedTheme = localStorage.getItem('theme');
         } catch (error) {
-            console.warn("로컬 스토리지를 사용할 수 없는 환경입니다. 기본 테마를 적용합니다.");
+            console.warn("로컬 스토리지를 사용할 수 없는 환경입니다.");
         }
 
         if (savedTheme === 'light') {
@@ -407,7 +417,6 @@
         }
 
         // --- Scroll Reveal Animation ---
-        // JS 에러가 나더라도 기본적으로 화면이 보이도록 CSS 대신 JS 내부에서 초기 투명도를 세팅합니다.
         const observerOptions = {
             threshold: 0.1,
             rootMargin: "0px 0px -30px 0px"
