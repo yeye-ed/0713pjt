@@ -17,6 +17,7 @@
             --text-sub: #c5c6c7;
             --neon-point: #66fcf1;
             --neon-shadow: rgba(102, 252, 241, 0.3);
+            --neon-bg: rgba(102, 252, 241, 0.1);
             --border-color: rgba(255, 255, 255, 0.05);
             --timeline-line: rgba(197, 198, 199, 0.2);
             --hero-overlay: rgba(11, 12, 16, 0.85); 
@@ -30,6 +31,7 @@
             --text-sub: #4b5563;
             --neon-point: #0d9488;
             --neon-shadow: rgba(13, 148, 136, 0.2);
+            --neon-bg: rgba(13, 148, 136, 0.1);
             --border-color: rgba(0, 0, 0, 0.05);
             --timeline-line: rgba(75, 85, 99, 0.2);
             --hero-overlay: rgba(255, 255, 255, 0.85); 
@@ -106,18 +108,20 @@
         .quote-result { margin-top: 2rem; padding: 1.5rem; background: var(--bg-color); border-radius: 12px; border-left: 4px solid var(--neon-point); display: none; text-align: left; }
         .quote-result.active { display: block; animation: fadeUp 0.4s ease forwards; }
         
-        .quote-result .spec-title { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; }
+        .quote-result .spec-title { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.8rem; }
+        
+        /* 상세 설명 배지 스타일 */
+        .quote-result .spec-desc { 
+            display: inline-block; font-size: 0.9rem; color: var(--neon-point); 
+            background: var(--neon-bg); padding: 0.5rem 0.8rem; border-radius: 6px; 
+            margin-bottom: 1.2rem; line-height: 1.4; word-break: keep-all;
+        }
+
         .quote-result .spec-details { font-size: 1.2rem; font-weight: 600; line-height: 1.6; color: var(--text-main); }
         .quote-result .spec-price { margin-top: 0.5rem; margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 800; color: var(--neon-point); text-align: right; }
 
-        /* =========================================
-           [NEW] Link Preview Card UI
-           ========================================= */
-        .preview-card {
-            display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px;
-            overflow: hidden; background: var(--surface-color); transition: border-color 0.3s, background 0.3s;
-            text-decoration: none; color: inherit; margin-top: 1rem;
-        }
+        /* Link Preview Card UI */
+        .preview-card { display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--surface-color); transition: border-color 0.3s, background 0.3s; text-decoration: none; color: inherit; margin-top: 1rem; }
         .preview-card:hover { border-color: var(--neon-point); background: var(--surface-hover); }
         .preview-thumb { width: 80px; height: 80px; background: #2a3644; display: flex; align-items: center; justify-content: center; font-size: 2rem; border-right: 1px solid var(--border-color); }
         .preview-info { padding: 0.8rem 1rem; flex: 1; overflow: hidden; }
@@ -182,6 +186,7 @@
 
     <footer><p>&copy; 2026 Custom PC Guide. All rights reserved.</p></footer>
 
+    <!-- 견적 확인 모달 HTML -->
     <div id="quote-modal" class="modal-overlay">
         <div class="modal-content">
             <button class="modal-close" onclick="closeModal()">&times;</button>
@@ -195,13 +200,14 @@
 
             <div id="quote-result" class="quote-result">
                 <div class="spec-title" id="spec-title-label">선택한 용도의 추천 스펙</div>
+                <!-- 설명 텍스트 컨테이너 -->
+                <div class="spec-desc" id="spec-desc-text"></div>
+                
                 <div class="spec-details" id="spec-details-text"></div>
                 <div class="spec-price" id="spec-price-text"></div>
                 
                 <a href="#" target="_blank" id="preview-link" class="preview-card">
-                    <div class="preview-thumb">
-                        <span id="preview-icon">🛒</span>
-                    </div>
+                    <div class="preview-thumb"><span>🛒</span></div>
                     <div class="preview-info">
                         <div class="preview-title" id="preview-title">G마켓 상품 보기</div>
                         <div class="preview-desc" id="preview-desc">안전하게 구매하러 가기</div>
@@ -240,11 +246,12 @@
         document.querySelectorAll('.fade-in').forEach(el => { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out"; observer.observe(el); });
 
         // =========================================
-        // 견적 데이터 (링크 포함)
+        // 견적 데이터 (해상도 추천 내용 추가)
         // =========================================
         const quotesData = {
             'budget': {
                 title: '가성비 견적',
+                desc: '💡 FHD환경 추천, ddr4 사용으로 비교적 저렴',
                 specs: '12400f + 5060<br>ddr4 32gb',
                 price: '130만원',
                 link: 'https://item.gmarket.co.kr/Item?goodscode=4596372926',
@@ -252,6 +259,7 @@
             },
             'gaming': {
                 title: '온라인 게임 견적',
+                desc: '💡 QHD환경 추천, 온라인 게임 특성상 AMD의 3D캐시 씨피유 추천',
                 specs: '7800x3d + 5060<br>ddr5 32gb',
                 price: '약 160만원',
                 link: 'https://item.gmarket.co.kr/Item?goodscode=4427944567',
@@ -259,6 +267,7 @@
             },
             'work': {
                 title: '작업용 견적',
+                desc: '💡 4K환경 추천, 작업에서 비교적 우위를 지니는 인텔의 270K 사용',
                 specs: '270k + 5070ti<br>ddr5 32gb',
                 price: '약 290만원',
                 link: 'https://item.gmarket.co.kr/Item?goodscode=4322870966',
@@ -269,10 +278,10 @@
         const modal = document.getElementById('quote-modal');
         const resultBox = document.getElementById('quote-result');
         const specTitleLabel = document.getElementById('spec-title-label');
+        const specDescText = document.getElementById('spec-desc-text');
         const specDetailsText = document.getElementById('spec-details-text');
         const specPriceText = document.getElementById('spec-price-text');
         
-        // 미리보기 카드 요소
         const previewLink = document.getElementById('preview-link');
         const previewTitle = document.getElementById('preview-title');
 
@@ -292,10 +301,10 @@
             setTimeout(() => {
                 const data = quotesData[type];
                 specTitleLabel.textContent = `[ ${data.title} ] 추천 구성`;
+                specDescText.innerHTML = data.desc;
                 specDetailsText.innerHTML = data.specs;
                 specPriceText.textContent = data.price;
                 
-                // 미리보기 카드 데이터 적용
                 previewLink.href = data.link;
                 previewTitle.textContent = data.previewTitle;
                 
