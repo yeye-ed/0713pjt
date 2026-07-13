@@ -50,352 +50,164 @@
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
+        a { text-decoration: none; color: inherit; }
 
         /* =========================================
            Scroll Progress Bar
            ========================================= */
         .scroll-progress-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: transparent;
-            z-index: 9999;
+            position: fixed; top: 0; left: 0; width: 100%; height: 4px; z-index: 9999;
         }
-
         .scroll-progress-bar {
-            height: 100%;
-            width: 0%;
-            background-color: var(--neon-point);
-            box-shadow: 0 0 10px var(--neon-shadow);
-            transition: width 0.1s ease-out;
-            border-radius: 0 2px 2px 0;
+            height: 100%; width: 0%; background-color: var(--neon-point);
+            box-shadow: 0 0 10px var(--neon-shadow); transition: width 0.1s ease-out;
         }
 
         /* =========================================
            Theme Toggle Button
            ========================================= */
         .theme-toggle {
-            position: fixed;
-            top: 1.5rem;
-            right: 2rem;
-            z-index: 1000;
-            background: var(--surface-color);
-            border: 2px solid var(--neon-point);
-            color: var(--text-main);
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 0 15px var(--neon-shadow);
-            transition: all 0.3s ease;
+            position: fixed; top: 1.5rem; right: 2rem; z-index: 1000;
+            background: var(--surface-color); border: 2px solid var(--neon-point);
+            color: var(--text-main); width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; cursor: pointer; transition: all 0.3s ease;
         }
-
-        .theme-toggle:hover {
-            transform: scale(1.1);
-            background: var(--neon-point);
-        }
+        .theme-toggle:hover { transform: scale(1.1); background: var(--neon-point); }
 
         /* =========================================
-           Entrance Animations (등장 연출 키프레임)
+           Entrance Animations
            ========================================= */
-        @keyframes scaleOutBg {
-            0% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-
-        @keyframes fadeUp {
-            0% { 
-                opacity: 0; 
-                transform: translateY(30px); 
-            }
-            100% { 
-                opacity: 1; 
-                transform: translateY(0); 
-            }
-        }
+        @keyframes scaleOutBg { 0% { transform: scale(1.05); } 100% { transform: scale(1); } }
+        @keyframes fadeUp { 0% { opacity: 0; transform: translateY(30px); } 100% { opacity: 1; transform: translateY(0); } }
 
         /* =========================================
            Hero Section
            ========================================= */
         .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 2rem;
-            position: relative;
-            overflow: hidden; /* 배경 축소 시 넘침 방지 */
+            min-height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 2rem; position: relative; overflow: hidden;
         }
-
-        /* 배경 이미지를 가상 요소로 분리하여 애니메이션 적용 */
         .hero::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
             background-image: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('image_f15a01.jpg');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            z-index: -1;
-            transition: background-image 0.3s ease;
-            
-            /* 등장 시 줌아웃 효과 */
-            animation: scaleOutBg 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+            background-size: cover; background-position: center; background-attachment: fixed;
+            z-index: -1; animation: scaleOutBg 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
         }
-
-        /* 내부 요소 시간차 등장 설정 */
-        .hero-content {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 1;
-        }
-
-        .hero p.sub-title {
-            font-size: 1.5rem;
-            color: var(--text-sub);
-            margin-bottom: 0.5rem;
-            opacity: 0; /* 초기 투명 */
-            animation: fadeUp 0.8s ease-out 0.2s forwards; /* 0.2초 후 시작 */
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 800;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
-            opacity: 0;
-            animation: fadeUp 0.8s ease-out 0.4s forwards; /* 0.4초 후 시작 */
-        }
-
-        .hero h1 span {
-            color: var(--neon-point);
-            text-shadow: 0 0 20px var(--neon-shadow);
-        }
-
-        .hero p.desc {
-            font-size: 1.1rem;
-            color: var(--text-sub);
-            margin-bottom: 3rem;
-            opacity: 0;
-            animation: fadeUp 0.8s ease-out 0.6s forwards; /* 0.6초 후 시작 */
-        }
-
-        .hero .btn-primary {
-            opacity: 0;
-            animation: fadeUp 0.8s ease-out 0.8s forwards; /* 0.8초 후 시작 */
-        }
+        .hero-content { display: flex; flex-direction: column; align-items: center; z-index: 1; }
+        
+        .hero p.sub-title { font-size: 1.5rem; color: var(--text-sub); margin-bottom: 0.5rem; opacity: 0; animation: fadeUp 0.8s ease-out 0.2s forwards; }
+        .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 1rem; line-height: 1.2; opacity: 0; animation: fadeUp 0.8s ease-out 0.4s forwards; }
+        .hero h1 span { color: var(--neon-point); text-shadow: 0 0 20px var(--neon-shadow); }
+        .hero p.desc { font-size: 1.1rem; color: var(--text-sub); margin-bottom: 3rem; opacity: 0; animation: fadeUp 0.8s ease-out 0.6s forwards; }
+        .hero .btn-primary { opacity: 0; animation: fadeUp 0.8s ease-out 0.8s forwards; }
 
         /* =========================================
-           Storytelling Flow
+           Storytelling Flow & Cards
            ========================================= */
-        .story-flow {
-            padding: 6rem 2rem;
-            background: linear-gradient(to bottom, var(--bg-color), var(--surface-color));
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 4rem;
-        }
-
-        .flow-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            position: relative;
-        }
-
-        .flow-container::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 0;
-            right: 0;
-            height: 2px;
-            background: var(--timeline-line);
-            z-index: 0;
-        }
-
+        .story-flow { padding: 6rem 2rem; background: linear-gradient(to bottom, var(--bg-color), var(--surface-color)); }
+        .section-title { text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 4rem; }
+        
+        .flow-container { max-width: 1000px; margin: 0 auto; display: flex; justify-content: space-between; position: relative; }
+        .flow-container::before { content: ''; position: absolute; top: 50%; left: 0; right: 0; height: 2px; background: var(--timeline-line); z-index: 0; }
         .flow-step {
-            position: relative;
-            z-index: 1;
-            background-color: var(--bg-color);
-            border: 2px solid var(--neon-point);
-            border-radius: 50%;
-            width: 120px;
-            height: 120px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            box-shadow: 0 0 15px var(--neon-shadow);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative; z-index: 1; background-color: var(--bg-color);
+            border: 2px solid var(--neon-point); border-radius: 50%; width: 120px; height: 120px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            box-shadow: 0 0 15px var(--neon-shadow); transition: transform 0.3s ease;
         }
+        .flow-step:hover { transform: translateY(-10px); box-shadow: 0 0 25px var(--neon-shadow); }
+        .flow-step span { font-size: 0.9rem; color: var(--text-sub); }
+        .flow-step strong { font-size: 1.1rem; margin-top: 0.5rem; }
 
-        .flow-step:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 25px var(--neon-shadow);
-        }
-
-        .flow-step span {
-            font-size: 0.9rem;
-            color: var(--text-sub);
-        }
-
-        .flow-step strong {
-            font-size: 1.1rem;
-            margin-top: 0.5rem;
-        }
+        .strengths { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; }
+        .card { background-color: var(--surface-color); padding: 2.5rem 2rem; border-radius: 16px; border: 1px solid var(--border-color); position: relative; overflow: hidden; transition: transform 0.3s ease; }
+        .card::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 4px; background-color: var(--neon-point); transform: scaleX(0); transform-origin: left; transition: transform 0.3s ease; }
+        .card:hover { transform: translateY(-5px); background-color: var(--surface-hover); }
+        .card:hover::after { transform: scaleX(1); }
+        .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--neon-point); }
+        .card p { color: var(--text-sub); word-break: keep-all; }
 
         /* =========================================
-           Strength Cards
+           CTA Section
            ========================================= */
-        .strengths {
-            padding: 6rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background-color: var(--surface-color);
-            padding: 2.5rem 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border-color);
-            transition: transform 0.3s ease, background-color 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .card::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background-color: var(--neon-point);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            background-color: var(--surface-hover);
-        }
-
-        .card:hover::after {
-            transform: scaleX(1);
-        }
-
-        .card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--neon-point);
-        }
-
-        .card p {
-            color: var(--text-sub);
-            word-break: keep-all;
-        }
-
-        /* =========================================
-           CTA
-           ========================================= */
-        .cta-section {
-            padding: 6rem 2rem;
-            text-align: center;
-            background-color: var(--bg-color);
-        }
-
+        .cta-section { padding: 6rem 2rem; text-align: center; background-color: var(--bg-color); }
         .btn-primary {
-            display: inline-block;
-            background-color: transparent;
-            color: var(--neon-point);
-            border: 2px solid var(--neon-point);
-            padding: 1rem 3rem;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            display: inline-block; background-color: transparent; color: var(--neon-point);
+            border: 2px solid var(--neon-point); padding: 1rem 3rem; font-size: 1.2rem;
+            font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-primary:hover { background-color: var(--neon-point); color: var(--bg-color); box-shadow: 0 0 30px var(--neon-shadow); }
+
+        footer { padding: 2rem; text-align: center; color: var(--text-sub); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+
+        /* =========================================
+           [NEW] Modal UI (맞춤형 견적 기능)
+           ========================================= */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            z-index: 10000; opacity: 0; visibility: hidden; transition: all 0.3s ease;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal-content {
+            background: var(--surface-color); padding: 3rem 2rem; border-radius: 20px;
+            border: 1px solid var(--border-color); width: 90%; max-width: 500px;
+            text-align: center; position: relative; transform: translateY(20px); transition: transform 0.3s ease;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        
+        .modal-close {
+            position: absolute; top: 1rem; right: 1.5rem; font-size: 2rem;
+            background: none; border: none; color: var(--text-sub); cursor: pointer; transition: color 0.3s;
+        }
+        .modal-close:hover { color: var(--neon-point); }
+        
+        .modal-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 2rem; }
+        
+        .quote-options { display: flex; flex-direction: column; gap: 1rem; }
+        .quote-btn {
+            background: var(--bg-color); color: var(--text-sub); border: 1px solid var(--border-color);
+            padding: 1rem; border-radius: 12px; font-size: 1.1rem; cursor: pointer; font-weight: 600;
+            transition: all 0.2s;
+        }
+        .quote-btn:hover { background: var(--surface-hover); color: var(--text-main); }
+        .quote-btn.active {
+            border-color: var(--neon-point); color: var(--neon-point);
             box-shadow: 0 0 15px var(--neon-shadow);
         }
 
-        .btn-primary:hover {
-            background-color: var(--neon-point);
-            color: var(--bg-color);
-            box-shadow: 0 0 30px var(--neon-shadow);
+        .quote-result {
+            margin-top: 2rem; padding: 1.5rem; background: var(--bg-color);
+            border-radius: 12px; border-left: 4px solid var(--neon-point);
+            display: none; text-align: left;
         }
+        .quote-result.active { display: block; animation: fadeUp 0.4s ease forwards; }
+        
+        .quote-result .spec-title { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.5rem; }
+        .quote-result .spec-details { font-size: 1.2rem; font-weight: 600; line-height: 1.6; color: var(--text-main); }
+        .quote-result .spec-price { margin-top: 1rem; font-size: 1.6rem; font-weight: 800; color: var(--neon-point); text-align: right; }
 
-        /* =========================================
-           Footer
-           ========================================= */
-        footer {
-            padding: 2rem;
-            text-align: center;
-            color: var(--text-sub);
-            font-size: 0.9rem;
-            border-top: 1px solid var(--border-color);
-        }
-
-        /* =========================================
-           Mobile Responsive
-           ========================================= */
+        /* 모바일 대응 */
         @media (max-width: 768px) {
-            .theme-toggle { top: 1.5rem; right: 1rem; width: 40px; height: 40px; font-size: 1.2rem; }
             .hero h1 { font-size: 2.5rem; }
-            .hero p.sub-title { font-size: 1.1rem; }
-            .hero p.desc { font-size: 1rem; margin-bottom: 2rem; }
-            .story-flow, .strengths, .cta-section { padding: 4rem 1.5rem; }
-            .section-title { font-size: 1.8rem; margin-bottom: 2.5rem; }
             .flow-container { flex-direction: column; align-items: center; gap: 2.5rem; }
-            .flow-container::before {
-                width: 2px; height: calc(100% - 120px); top: 60px; left: 50%; transform: translateX(-50%);
-            }
-            .card-grid { gap: 1.5rem; }
-            .card { padding: 1.8rem 1.5rem; }
-            .card h3 { font-size: 1.3rem; }
-            .btn-primary { padding: 0.8rem 2.5rem; font-size: 1.1rem; }
+            .flow-container::before { width: 2px; height: calc(100% - 120px); top: 60px; left: 50%; transform: translateX(-50%); }
+            .modal-content { padding: 2.5rem 1.5rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Scroll Progress Bar -->
-    <div class="scroll-progress-container">
-        <div class="scroll-progress-bar" id="scroll-progress"></div>
-    </div>
-
-    <!-- Theme Toggle -->
+    <div class="scroll-progress-container"><div class="scroll-progress-bar" id="scroll-progress"></div></div>
     <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환 버튼">☀️</button>
 
     <header class="hero">
-        <!-- 텍스트 래퍼 추가 -->
         <div class="hero-content">
             <p class="sub-title">용도만 고르세요, 완벽한 PC가 설계됩니다</p>
             <h1>내 손으로 완성하는<br><span>최적의 스펙</span></h1>
@@ -407,22 +219,10 @@
     <section class="story-flow">
         <h2 class="section-title">딱 4단계면 끝납니다</h2>
         <div class="flow-container">
-            <div class="flow-step fade-in">
-                <span>STEP 1</span>
-                <strong>용도 선택</strong>
-            </div>
-            <div class="flow-step fade-in">
-                <span>STEP 2</span>
-                <strong>개념 이해</strong>
-            </div>
-            <div class="flow-step fade-in">
-                <span>STEP 3</span>
-                <strong>견적 확인</strong>
-            </div>
-            <div class="flow-step fade-in">
-                <span>STEP 4</span>
-                <strong>액션 가이드</strong>
-            </div>
+            <div class="flow-step fade-in"><span>STEP 1</span><strong>용도 선택</strong></div>
+            <div class="flow-step fade-in"><span>STEP 2</span><strong>개념 이해</strong></div>
+            <div class="flow-step fade-in"><span>STEP 3</span><strong>견적 확인</strong></div>
+            <div class="flow-step fade-in"><span>STEP 4</span><strong>액션 가이드</strong></div>
         </div>
     </section>
 
@@ -431,98 +231,141 @@
         <div class="card-grid">
             <div class="card fade-in">
                 <h3>초보자 맞춤형 비유 설명</h3>
-                <p>CPU는 두뇌, RAM은 책상! 부품 이름부터 막막한 첫 조립러를 위해 누구나 이해할 수 있는 직관적인 비유로 부품의 역할을 알려드립니다.</p>
+                <p>CPU는 두뇌, RAM은 책상! 누구나 이해할 수 있는 직관적인 비유로 부품의 역할을 알려드립니다.</p>
             </div>
             <div class="card fade-in">
                 <h3>스팀 게임부터 대학 과제까지</h3>
-                <p>단순 웹서핑을 위한 가성비 사무용 PC부터, 하이엔드 스팀 게임을 완벽하게 방어하는 조합까지 용도에 딱 맞는 직관적인 견적을 추천합니다.</p>
+                <p>단순 웹서핑을 위한 가성비 사무용 PC부터, 쾌적한 플레이를 보장하는 조합까지 용도에 맞게 추천합니다.</p>
             </div>
             <div class="card fade-in">
                 <h3>놓치기 쉬운 실전 팁</h3>
-                <p>그래픽카드 업그레이드를 위한 적정 파워 용량 계산법부터, 필수 바이오스(BIOS) 세팅까지 당황하지 않도록 실전 팁을 제공합니다.</p>
+                <p>적정 파워 용량 계산법부터, 필수 바이오스(BIOS) 세팅까지 당황하지 않도록 실전 팁을 제공합니다.</p>
             </div>
         </div>
     </section>
 
     <section id="cta-target" class="cta-section">
         <h2 class="section-title" style="margin-bottom: 2rem;">나만의 완벽한 PC 설계를 시작해볼까요?</h2>
-        <button class="btn-primary" onclick="startGuide()">맞춤형 견적 만들기</button>
+        <!-- 모달 띄우기 함수 연결 -->
+        <button class="btn-primary" onclick="openModal()">맞춤형 견적 만들기</button>
     </section>
 
-    <footer>
-        <p>&copy; 2026 Custom PC Guide. All rights reserved.</p>
-    </footer>
+    <footer><p>&copy; 2026 Custom PC Guide. All rights reserved.</p></footer>
+
+    <!-- =========================================
+         [NEW] 견적 확인 모달 HTML
+         ========================================= -->
+    <div id="quote-modal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal()">&times;</button>
+            <h2 class="modal-title">주로 어떤 작업을 하시나요?</h2>
+            
+            <div class="quote-options">
+                <button class="quote-btn" onclick="showQuote('budget')">가성비 견적</button>
+                <button class="quote-btn" onclick="showQuote('gaming')">온라인 게임 견적</button>
+                <button class="quote-btn" onclick="showQuote('work')">작업용 견적</button>
+            </div>
+
+            <div id="quote-result" class="quote-result">
+                <div class="spec-title" id="spec-title-label">선택한 용도의 추천 스펙</div>
+                <div class="spec-details" id="spec-details-text"></div>
+                <div class="spec-price" id="spec-price-text"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
-        // --- Scroll Progress Bar Logic ---
+        // 스크롤 상단 바
         const progressBar = document.getElementById('scroll-progress');
-        
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
-            progressBar.style.width = scrollPercentage + '%';
+            progressBar.style.width = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 + '%' : '0%';
         });
 
-        // --- Theme Toggle Logic ---
+        // 테마 토글
         const themeToggleBtn = document.getElementById('theme-toggle');
         const rootElement = document.documentElement;
-        let savedTheme = null;
-
-        try {
-            savedTheme = localStorage.getItem('theme');
-        } catch (error) {
-            console.warn("로컬 스토리지를 사용할 수 없는 환경입니다.");
-        }
-
-        if (savedTheme === 'light') {
-            rootElement.setAttribute('data-theme', 'light');
-            themeToggleBtn.textContent = '🌙';
-        }
-
+        try { if(localStorage.getItem('theme') === 'light') { rootElement.setAttribute('data-theme', 'light'); themeToggleBtn.textContent = '🌙'; } } catch(e){}
         themeToggleBtn.addEventListener('click', () => {
-            const currentTheme = rootElement.getAttribute('data-theme');
-            
-            if (currentTheme === 'light') {
-                rootElement.removeAttribute('data-theme');
-                themeToggleBtn.textContent = '☀️';
-                try { localStorage.setItem('theme', 'dark'); } catch(e) {}
+            if (rootElement.getAttribute('data-theme') === 'light') {
+                rootElement.removeAttribute('data-theme'); themeToggleBtn.textContent = '☀️';
+                try { localStorage.setItem('theme', 'dark'); } catch(e){}
             } else {
-                rootElement.setAttribute('data-theme', 'light');
-                themeToggleBtn.textContent = '🌙';
-                try { localStorage.setItem('theme', 'light'); } catch(e) {}
+                rootElement.setAttribute('data-theme', 'light'); themeToggleBtn.textContent = '🌙';
+                try { localStorage.setItem('theme', 'light'); } catch(e){}
             }
         });
 
-        // --- Basic Interactions ---
-        function scrollToCTA() {
-            document.getElementById('cta-target').scrollIntoView({ behavior: 'smooth' });
-        }
+        // 스크롤 이동
+        function scrollToCTA() { document.getElementById('cta-target').scrollIntoView({ behavior: 'smooth' }); }
 
-        function startGuide() {
-            alert('용도 선택 페이지로 이동합니다. (준비 중입니다!)');
-        }
+        // 페이드 인 애니메이션 옵저버
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = "1"; entry.target.style.transform = "translateY(0)"; } });
+        }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+        document.querySelectorAll('.fade-in').forEach(el => { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out"; observer.observe(el); });
 
-        // --- Scroll Reveal Animation ---
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: "0px 0px -30px 0px"
+        // =========================================
+        // [NEW] 견적 모달 로직
+        // =========================================
+        const quotesData = {
+            'budget': {
+                title: '가성비 견적',
+                specs: '12400f + 5060<br>ddr4 32gb',
+                price: '130만원'
+            },
+            'gaming': {
+                title: '온라인 게임 견적',
+                specs: '7800x3d + 5060<br>ddr5 32gb',
+                price: '약 160만원'
+            },
+            'work': {
+                title: '작업용 견적',
+                specs: '270k + 5070ti<br>ddr5 32gb',
+                price: '약 290만원'
+            }
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = "1";
-                    entry.target.style.transform = "translateY(0)";
-                }
-            });
-        }, observerOptions);
+        const modal = document.getElementById('quote-modal');
+        const resultBox = document.getElementById('quote-result');
+        const specTitleLabel = document.getElementById('spec-title-label');
+        const specDetailsText = document.getElementById('spec-details-text');
+        const specPriceText = document.getElementById('spec-price-text');
 
-        document.querySelectorAll('.fade-in').forEach(el => {
-            el.style.opacity = "0";
-            el.style.transform = "translateY(20px)";
-            el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
-            observer.observe(el);
+        function openModal() {
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            // 모달 닫을 때 초기화
+            document.querySelectorAll('.quote-btn').forEach(btn => btn.classList.remove('active'));
+            resultBox.classList.remove('active');
+        }
+
+        function showQuote(type) {
+            // 1. 버튼 활성화 상태 변경
+            document.querySelectorAll('.quote-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector(`.quote-btn[onclick="showQuote('${type}')"]`).classList.add('active');
+            
+            // 2. 애니메이션 재시작을 위한 클래스 토글 (트릭)
+            resultBox.classList.remove('active');
+            
+            // 3. 데이터 바인딩
+            setTimeout(() => {
+                const data = quotesData[type];
+                specTitleLabel.textContent = `[ ${data.title} ] 추천 구성`;
+                specDetailsText.innerHTML = data.specs;
+                specPriceText.textContent = data.price;
+                
+                resultBox.classList.add('active');
+            }, 50); // 짧은 딜레이로 애니메이션 트리거
+        }
+
+        // 모달 바깥 영역 클릭 시 닫기
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
     </script>
 </body>
