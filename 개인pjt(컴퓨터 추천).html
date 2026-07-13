@@ -82,16 +82,50 @@
         .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--neon-point); }
         .card p { color: var(--text-sub); word-break: keep-all; }
 
+        /* =========================================
+           [NEW] Video Guide Section
+           ========================================= */
+        .video-guide {
+            padding: 6rem 2rem;
+            background: linear-gradient(to bottom, var(--surface-color), var(--bg-color));
+            text-align: center;
+        }
+
+        .video-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            /* 16:9 비율 유지 */
+            aspect-ratio: 16 / 9;
+            position: relative;
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-guide p.desc {
+            margin-top: 2rem;
+            color: var(--text-sub);
+            font-size: 1.1rem;
+        }
+
         /* CTA */
-        .cta-section { padding: 6rem 2rem; text-align: center; background-color: var(--bg-color); }
+        .cta-section { padding: 4rem 2rem 6rem; text-align: center; background-color: var(--bg-color); }
         .btn-primary { display: inline-block; background-color: transparent; color: var(--neon-point); border: 2px solid var(--neon-point); padding: 1rem 3rem; font-size: 1.2rem; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; }
         .btn-primary:hover { background-color: var(--neon-point); color: var(--bg-color); box-shadow: 0 0 30px var(--neon-shadow); }
 
         footer { padding: 2rem; text-align: center; color: var(--text-sub); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
 
-        /* =========================================
-           Modal UI
-           ========================================= */
+        /* Modal UI */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 10000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal-content { background: var(--surface-color); padding: 3rem 2rem; border-radius: 20px; border: 1px solid var(--border-color); width: 90%; max-width: 500px; text-align: center; position: relative; transform: translateY(20px); transition: transform 0.3s ease; box-shadow: 0 20px 40px rgba(0,0,0,0.5); }
@@ -109,14 +143,7 @@
         .quote-result.active { display: block; animation: fadeUp 0.4s ease forwards; }
         
         .quote-result .spec-title { font-size: 0.9rem; color: var(--text-sub); margin-bottom: 0.8rem; }
-        
-        /* 상세 설명 배지 스타일 */
-        .quote-result .spec-desc { 
-            display: inline-block; font-size: 0.9rem; color: var(--neon-point); 
-            background: var(--neon-bg); padding: 0.5rem 0.8rem; border-radius: 6px; 
-            margin-bottom: 1.2rem; line-height: 1.4; word-break: keep-all;
-        }
-
+        .quote-result .spec-desc { display: inline-block; font-size: 0.9rem; color: var(--neon-point); background: var(--neon-bg); padding: 0.5rem 0.8rem; border-radius: 6px; margin-bottom: 1.2rem; line-height: 1.4; word-break: keep-all; }
         .quote-result .spec-details { font-size: 1.2rem; font-weight: 600; line-height: 1.6; color: var(--text-main); }
         .quote-result .spec-price { margin-top: 0.5rem; margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 800; color: var(--neon-point); text-align: right; }
 
@@ -179,9 +206,24 @@
         </div>
     </section>
 
+    <!-- [NEW] Video Guide Section -->
+    <section class="video-guide">
+        <h2 class="section-title fade-in" style="margin-bottom: 2rem;">조립 후 필수 초기 설정 가이드</h2>
+        <div class="video-wrapper fade-in">
+            <!-- 유튜브 일반 링크(watch?v=...) 대신 임베드용(embed/...) 태그 사용 -->
+            <iframe 
+                src="https://www.youtube.com/embed/xGyPsxi8sS4" 
+                title="PC 초기 설정 가이드 유튜브 영상" 
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        <p class="desc fade-in">윈도우 설치부터 필수 드라이버 세팅까지, 영상으로 쉽고 빠르게 따라 해보세요.</p>
+    </section>
+
     <section id="cta-target" class="cta-section">
-        <h2 class="section-title" style="margin-bottom: 2rem;">나만의 완벽한 PC 설계를 시작해볼까요?</h2>
-        <button class="btn-primary" onclick="openModal()">맞춤형 견적 만들기</button>
+        <h2 class="section-title fade-in" style="margin-bottom: 2rem;">나만의 완벽한 PC 설계를 시작해볼까요?</h2>
+        <button class="btn-primary fade-in" onclick="openModal()">맞춤형 견적 만들기</button>
     </section>
 
     <footer><p>&copy; 2026 Custom PC Guide. All rights reserved.</p></footer>
@@ -200,9 +242,7 @@
 
             <div id="quote-result" class="quote-result">
                 <div class="spec-title" id="spec-title-label">선택한 용도의 추천 스펙</div>
-                <!-- 설명 텍스트 컨테이너 -->
                 <div class="spec-desc" id="spec-desc-text"></div>
-                
                 <div class="spec-details" id="spec-details-text"></div>
                 <div class="spec-price" id="spec-price-text"></div>
                 
@@ -246,7 +286,7 @@
         document.querySelectorAll('.fade-in').forEach(el => { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out"; observer.observe(el); });
 
         // =========================================
-        // 견적 데이터 (해상도 추천 내용 추가)
+        // 견적 데이터
         // =========================================
         const quotesData = {
             'budget': {
