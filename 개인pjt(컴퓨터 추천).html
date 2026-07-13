@@ -65,7 +65,7 @@
             width: 100%;
             height: 4px;
             background-color: transparent;
-            z-index: 9999; /* 모든 요소보다 위에 배치 */
+            z-index: 9999;
         }
 
         .scroll-progress-bar {
@@ -106,6 +106,25 @@
         }
 
         /* =========================================
+           Entrance Animations (등장 연출 키프레임)
+           ========================================= */
+        @keyframes scaleOutBg {
+            0% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fadeUp {
+            0% { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            100% { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+
+        /* =========================================
            Hero Section
            ========================================= */
         .hero {
@@ -117,12 +136,39 @@
             text-align: center;
             padding: 2rem;
             position: relative;
-            
+            overflow: hidden; /* 배경 축소 시 넘침 방지 */
+        }
+
+        /* 배경 이미지를 가상 요소로 분리하여 애니메이션 적용 */
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
             background-image: linear-gradient(var(--hero-overlay), var(--hero-overlay)), url('image_f15a01.jpg');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            z-index: -1;
             transition: background-image 0.3s ease;
+            
+            /* 등장 시 줌아웃 효과 */
+            animation: scaleOutBg 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+        }
+
+        /* 내부 요소 시간차 등장 설정 */
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 1;
+        }
+
+        .hero p.sub-title {
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            margin-bottom: 0.5rem;
+            opacity: 0; /* 초기 투명 */
+            animation: fadeUp 0.8s ease-out 0.2s forwards; /* 0.2초 후 시작 */
         }
 
         .hero h1 {
@@ -131,6 +177,8 @@
             margin-bottom: 1rem;
             letter-spacing: -0.02em;
             line-height: 1.2;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.4s forwards; /* 0.4초 후 시작 */
         }
 
         .hero h1 span {
@@ -138,16 +186,17 @@
             text-shadow: 0 0 20px var(--neon-shadow);
         }
 
-        .hero p.sub-title {
-            font-size: 1.5rem;
-            color: var(--text-sub);
-            margin-bottom: 0.5rem;
-        }
-
         .hero p.desc {
             font-size: 1.1rem;
             color: var(--text-sub);
             margin-bottom: 3rem;
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.6s forwards; /* 0.6초 후 시작 */
+        }
+
+        .hero .btn-primary {
+            opacity: 0;
+            animation: fadeUp 0.8s ease-out 0.8s forwards; /* 0.8초 후 시작 */
         }
 
         /* =========================================
@@ -337,17 +386,22 @@
 </head>
 <body>
 
+    <!-- Scroll Progress Bar -->
     <div class="scroll-progress-container">
         <div class="scroll-progress-bar" id="scroll-progress"></div>
     </div>
 
+    <!-- Theme Toggle -->
     <button id="theme-toggle" class="theme-toggle" aria-label="테마 전환 버튼">☀️</button>
 
     <header class="hero">
-        <p class="sub-title">용도만 고르세요, 완벽한 PC가 설계됩니다</p>
-        <h1>내 손으로 완성하는<br><span>최적의 스펙</span></h1>
-        <p class="desc">헷갈리는 부품 조합은 그만, 나만의 맞춤형 PC 가이드</p>
-        <button class="btn-primary" onclick="scrollToCTA()">지금 바로 시작하기</button>
+        <!-- 텍스트 래퍼 추가 -->
+        <div class="hero-content">
+            <p class="sub-title">용도만 고르세요, 완벽한 PC가 설계됩니다</p>
+            <h1>내 손으로 완성하는<br><span>최적의 스펙</span></h1>
+            <p class="desc">헷갈리는 부품 조합은 그만, 나만의 맞춤형 PC 가이드</p>
+            <button class="btn-primary" onclick="scrollToCTA()">지금 바로 시작하기</button>
+        </div>
     </header>
 
     <section class="story-flow">
@@ -406,7 +460,6 @@
         window.addEventListener('scroll', () => {
             const scrollTop = window.scrollY || document.documentElement.scrollTop;
             const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            // 0으로 나누는 에러 방지
             const scrollPercentage = scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0;
             progressBar.style.width = scrollPercentage + '%';
         });
