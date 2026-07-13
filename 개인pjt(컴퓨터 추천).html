@@ -82,47 +82,82 @@
         .card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--neon-point); }
         .card p { color: var(--text-sub); word-break: keep-all; }
 
-        /* CTA Section (버튼 영역) */
+        /* CTA Section */
         .cta-section { padding: 6rem 2rem 3rem; text-align: center; background-color: var(--bg-color); }
         .btn-primary { display: inline-block; background-color: transparent; color: var(--neon-point); border: 2px solid var(--neon-point); padding: 1rem 3rem; font-size: 1.2rem; font-weight: 700; border-radius: 30px; cursor: pointer; transition: all 0.3s ease; }
         .btn-primary:hover { background-color: var(--neon-point); color: var(--bg-color); box-shadow: 0 0 30px var(--neon-shadow); }
 
-        /* =========================================
-           Video Guide Section (버튼 아래로 이동)
-           ========================================= */
-        .video-guide {
-            padding: 3rem 2rem 6rem;
-            background-color: var(--bg-color);
-            text-align: center;
-        }
+        /* Video Guide Section */
+        .video-guide { padding: 3rem 2rem 6rem; background-color: var(--bg-color); text-align: center; }
+        .video-wrapper { max-width: 800px; margin: 0 auto; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 10px 30px rgba(0,0,0,0.4); aspect-ratio: 16 / 9; position: relative; }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .video-guide p.desc { margin-top: 2rem; color: var(--text-sub); font-size: 1.1rem; }
 
-        .video-wrapper {
+        /* =========================================
+           [NEW] Guestbook Section
+           ========================================= */
+        .guestbook-section {
+            padding: 6rem 2rem;
+            background: linear-gradient(to bottom, var(--bg-color), var(--surface-color));
+        }
+        
+        .guestbook-container {
             max-width: 800px;
             margin: 0 auto;
-            border-radius: 16px;
-            overflow: hidden;
+        }
+
+        .guestbook-form {
+            display: flex; flex-direction: column; gap: 1rem;
+            margin-bottom: 3rem; background: var(--bg-color);
+            padding: 2.5rem 2rem; border-radius: 16px; 
             border: 1px solid var(--border-color);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            aspect-ratio: 16 / 9;
-            position: relative;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
+        .guestbook-form input, .guestbook-form textarea {
+            width: 100%; padding: 1rem; border-radius: 8px;
+            border: 1px solid var(--border-color);
+            background: var(--surface-color); color: var(--text-main);
+            font-size: 1rem; transition: border-color 0.3s;
         }
 
-        .video-guide p.desc {
-            margin-top: 2rem;
-            color: var(--text-sub);
-            font-size: 1.1rem;
+        .guestbook-form input:focus, .guestbook-form textarea:focus {
+            outline: none; border-color: var(--neon-point);
         }
 
-        footer { padding: 2rem; text-align: center; color: var(--text-sub); font-size: 0.9rem; border-top: 1px solid var(--border-color); }
+        .guestbook-form textarea { resize: vertical; }
+
+        .guestbook-list {
+            display: flex; flex-direction: column; gap: 1.5rem;
+        }
+
+        .comment-card {
+            background: var(--bg-color); padding: 1.5rem 2rem;
+            border-radius: 12px; border-left: 4px solid var(--neon-point);
+            border-top: 1px solid var(--border-color);
+            border-right: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comment-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 0.8rem; font-size: 0.9rem; color: var(--text-sub);
+        }
+
+        .comment-name {
+            font-weight: 700; color: var(--neon-point); font-size: 1.1rem;
+        }
+        
+        .comment-text {
+            color: var(--text-main); line-height: 1.6; white-space: pre-wrap;
+        }
+
+        .empty-message {
+            text-align: center; color: var(--text-sub); padding: 2rem;
+            background: var(--bg-color); border-radius: 12px; border: 1px dashed var(--border-color);
+        }
+
+        footer { padding: 2rem; text-align: center; color: var(--text-sub); font-size: 0.9rem; border-top: 1px solid var(--border-color); background: var(--surface-color); }
 
         /* Modal UI */
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(5px); display: flex; justify-content: center; align-items: center; z-index: 10000; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
@@ -146,7 +181,6 @@
         .quote-result .spec-details { font-size: 1.2rem; font-weight: 600; line-height: 1.6; color: var(--text-main); }
         .quote-result .spec-price { margin-top: 0.5rem; margin-bottom: 1.5rem; font-size: 1.6rem; font-weight: 800; color: var(--neon-point); text-align: right; }
 
-        /* Link Preview Card UI */
         .preview-card { display: flex; align-items: center; border: 1px solid var(--border-color); border-radius: 8px; overflow: hidden; background: var(--surface-color); transition: border-color 0.3s, background 0.3s; text-decoration: none; color: inherit; margin-top: 1rem; }
         .preview-card:hover { border-color: var(--neon-point); background: var(--surface-hover); }
         .preview-thumb { width: 80px; height: 80px; background: #2a3644; display: flex; align-items: center; justify-content: center; font-size: 2rem; border-right: 1px solid var(--border-color); }
@@ -160,6 +194,7 @@
             .flow-container { flex-direction: column; align-items: center; gap: 2.5rem; }
             .flow-container::before { width: 2px; height: calc(100% - 120px); top: 60px; left: 50%; transform: translateX(-50%); }
             .modal-content { padding: 2.5rem 1.5rem; }
+            .guestbook-form { padding: 1.5rem; }
         }
     </style>
 </head>
@@ -223,6 +258,20 @@
         <p class="desc fade-in">윈도우 설치부터 필수 드라이버 세팅까지, 영상으로 쉽고 빠르게 따라 해보세요.</p>
     </section>
 
+    <section class="guestbook-section">
+        <h2 class="section-title fade-in" style="margin-bottom: 2rem;">자유롭게 의견을 남겨주세요</h2>
+        <div class="guestbook-container fade-in">
+            <form class="guestbook-form" id="guestbook-form">
+                <input type="text" id="gb-name" placeholder="닉네임 (최대 10자)" maxlength="10" required>
+                <textarea id="gb-message" rows="3" placeholder="PC 조립에 대한 고민이나 방문 후기를 남겨주세요!" required></textarea>
+                <button type="submit" class="btn-primary" style="align-self: flex-end; padding: 0.8rem 2rem; font-size: 1rem;">등록하기</button>
+            </form>
+            
+            <div class="guestbook-list" id="guestbook-list">
+                </div>
+        </div>
+    </section>
+
     <footer><p>&copy; 2026 Custom PC Guide. All rights reserved.</p></footer>
 
     <div id="quote-modal" class="modal-overlay">
@@ -281,34 +330,11 @@
         const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting) { entry.target.style.opacity = "1"; entry.target.style.transform = "translateY(0)"; } }); }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
         document.querySelectorAll('.fade-in').forEach(el => { el.style.opacity = "0"; el.style.transform = "translateY(20px)"; el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out"; observer.observe(el); });
 
-        // =========================================
         // 견적 데이터
-        // =========================================
         const quotesData = {
-            'budget': {
-                title: '가성비 견적',
-                desc: '💡 FHD환경 추천, ddr4 사용으로 비교적 저렴',
-                specs: '12400f + 5060<br>ddr4 32gb',
-                price: '130만원',
-                link: 'https://item.gmarket.co.kr/Item?goodscode=4596372926',
-                previewTitle: '[가성비 PC] 12400f + 5060'
-            },
-            'gaming': {
-                title: '온라인 게임 견적',
-                desc: '💡 QHD환경 추천, 온라인 게임 특성상 AMD의 3D캐시 씨피유 추천',
-                specs: '7800x3d + 5060<br>ddr5 32gb',
-                price: '약 160만원',
-                link: 'https://item.gmarket.co.kr/Item?goodscode=4427944567',
-                previewTitle: '[게이밍 PC] 7800x3d + 5060'
-            },
-            'work': {
-                title: '작업용 견적',
-                desc: '💡 4K환경 추천, 작업에서 비교적 우위를 지니는 인텔의 270K 사용',
-                specs: '270k + 5070ti<br>ddr5 32gb',
-                price: '약 290만원',
-                link: 'https://item.gmarket.co.kr/Item?goodscode=4322870966',
-                previewTitle: '[하이엔드 작업용 PC] 270k + 5070ti'
-            }
+            'budget': { title: '가성비 견적', desc: '💡 FHD환경 추천, ddr4 사용으로 비교적 저렴', specs: '12400f + 5060<br>ddr4 32gb', price: '130만원', link: 'https://item.gmarket.co.kr/Item?goodscode=4596372926', previewTitle: '[가성비 PC] 12400f + 5060' },
+            'gaming': { title: '온라인 게임 견적', desc: '💡 QHD환경 추천, 온라인 게임 특성상 AMD의 3D캐시 씨피유 추천', specs: '7800x3d + 5060<br>ddr5 32gb', price: '약 160만원', link: 'https://item.gmarket.co.kr/Item?goodscode=4427944567', previewTitle: '[게이밍 PC] 7800x3d + 5060' },
+            'work': { title: '작업용 견적', desc: '💡 4K환경 추천, 작업에서 비교적 우위를 지니는 인텔의 270K 사용', specs: '270k + 5070ti<br>ddr5 32gb', price: '약 290만원', link: 'https://item.gmarket.co.kr/Item?goodscode=4322870966', previewTitle: '[하이엔드 작업용 PC] 270k + 5070ti' }
         };
 
         const modal = document.getElementById('quote-modal');
@@ -317,7 +343,6 @@
         const specDescText = document.getElementById('spec-desc-text');
         const specDetailsText = document.getElementById('spec-details-text');
         const specPriceText = document.getElementById('spec-price-text');
-        
         const previewLink = document.getElementById('preview-link');
         const previewTitle = document.getElementById('preview-title');
 
@@ -331,7 +356,6 @@
         function showQuote(type) {
             document.querySelectorAll('.quote-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector(`.quote-btn[onclick="showQuote('${type}')"]`).classList.add('active');
-            
             resultBox.classList.remove('active');
             
             setTimeout(() => {
@@ -340,15 +364,124 @@
                 specDescText.innerHTML = data.desc;
                 specDetailsText.innerHTML = data.specs;
                 specPriceText.textContent = data.price;
-                
                 previewLink.href = data.link;
                 previewTitle.textContent = data.previewTitle;
-                
                 resultBox.classList.add('active');
             }, 50); 
         }
 
         modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        // =========================================
+        // [NEW] Guestbook Logic (localStorage)
+        // =========================================
+        const gbForm = document.getElementById('guestbook-form');
+        const gbName = document.getElementById('gb-name');
+        const gbMessage = document.getElementById('gb-message');
+        const gbList = document.getElementById('guestbook-list');
+
+        const STORAGE_KEY = 'pc_guide_guestbook';
+
+        // 데이터 불러오기
+        function loadComments() {
+            try {
+                const saved = localStorage.getItem(STORAGE_KEY);
+                return saved ? JSON.parse(saved) : [];
+            } catch (e) {
+                console.warn("로컬 스토리지를 사용할 수 없습니다.");
+                return [];
+            }
+        }
+
+        // 데이터 저장하기
+        function saveComments(comments) {
+            try {
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(comments));
+            } catch (e) {
+                console.warn("로컬 스토리지 저장에 실패했습니다.");
+            }
+        }
+
+        // 방명록 화면에 그리기
+        function renderComments() {
+            const comments = loadComments();
+            gbList.innerHTML = '';
+            
+            if (comments.length === 0) {
+                gbList.innerHTML = '<div class="empty-message">아직 등록된 방명록이 없습니다. 첫 번째 주인공이 되어보세요!</div>';
+                return;
+            }
+
+            // 최신 글이 위로 오도록 역순(reverse) 정렬
+            comments.slice().reverse().forEach(comment => {
+                const card = document.createElement('div');
+                card.className = 'comment-card fade-in';
+                
+                const header = document.createElement('div');
+                header.className = 'comment-header';
+                
+                const nameSpan = document.createElement('span');
+                nameSpan.className = 'comment-name';
+                nameSpan.textContent = comment.name; // textContent 사용으로 XSS 방지
+                
+                const dateSpan = document.createElement('span');
+                dateSpan.textContent = comment.date;
+                
+                header.appendChild(nameSpan);
+                header.appendChild(dateSpan);
+                
+                const textP = document.createElement('p');
+                textP.className = 'comment-text';
+                textP.textContent = comment.message; // textContent 사용으로 XSS 방지
+                
+                card.appendChild(header);
+                card.appendChild(textP);
+                
+                gbList.appendChild(card);
+            });
+            
+            // 새로 그려진 요소들에 스크롤 애니메이션 적용
+            document.querySelectorAll('.comment-card.fade-in').forEach(el => {
+                el.style.opacity = "0";
+                el.style.transform = "translateY(20px)";
+                el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+                observer.observe(el);
+            });
+        }
+
+        // 폼 제출 이벤트
+        gbForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const nameVal = gbName.value.trim();
+            const msgVal = gbMessage.value.trim();
+            
+            if(!nameVal || !msgVal) return;
+
+            // 현재 시간 포맷팅 (YYYY. MM. DD. HH:mm)
+            const now = new Date();
+            const dateString = now.toLocaleDateString('ko-KR') + ' ' + 
+                               now.getHours().toString().padStart(2, '0') + ':' + 
+                               now.getMinutes().toString().padStart(2, '0');
+
+            const newComment = {
+                id: Date.now(),
+                name: nameVal,
+                message: msgVal,
+                date: dateString
+            };
+
+            const comments = loadComments();
+            comments.push(newComment);
+            saveComments(comments);
+            
+            // 입력창 초기화 및 리렌더링
+            gbName.value = '';
+            gbMessage.value = '';
+            renderComments();
+        });
+
+        // 페이지 로드 시 초기 렌더링
+        renderComments();
     </script>
 </body>
 </html>
